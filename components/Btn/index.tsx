@@ -12,4 +12,8 @@ export default styled.button`
   &:hover {
     background-color: rgb(245 208 254);
   }
+
+  &:active {
+    background-color: rgb(240 171 252);
+  }
 `;
