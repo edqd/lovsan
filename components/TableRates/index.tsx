@@ -1,13 +1,17 @@
 import PulseLabel from "components/PulseLabel";
 import { Rate, useExchangeList } from "hooks/useExchangeList";
 import React, { useState, useMemo } from "react";
-import CurrencyCell from "./CurrencyCell";
+import { Row, Price, UnitPrice } from "./Row";
+import { Footer } from "./Footer";
+import Btn from "components/Btn"
+import { Table, FullWidth } from "./Table";
 
 const perPage = 10;
 
-export const TableRates: React.FC<{ onSelect: (rate: Rate) => void }> = ({
-  onSelect,
-}) => {
+export const TableRates: React.FC<{
+  onSelect: (rate: Rate) => void;
+  active?: Rate;
+}> = ({ onSelect, active }) => {
   const { isLoading, data, error } = useExchangeList();
   const [state, setState] = useState({ page: 0 });
   const { batch, hasMore } = useMemo(() => {
@@ -20,47 +24,62 @@ export const TableRates: React.FC<{ onSelect: (rate: Rate) => void }> = ({
   }, [data, state]);
 
   if (isLoading) {
-    return <PulseLabel>Loading</PulseLabel>;
+    return (
+      <FullWidth>
+        <PulseLabel>Loading</PulseLabel>
+      </FullWidth>
+    );
   }
 
   if (error) {
-    return <div>rip</div>;
+    return (
+      <FullWidth>
+        Sorry, there was an error while downloading up-to-date information.
+        Please try again later.
+      </FullWidth>
+    );
   }
 
   return (
-    <div>
-      <table>
+    <FullWidth>
+      <Table>
         {batch.map((rate) => {
           return (
-            <tr
+            <Row
               key={rate.code}
               onClick={() => onSelect(rate)}
               data-testid={`table-row-${rate.code}`}
+              active={rate.code === active?.code}
             >
-              <td>{rate.country}</td>
-              <td>{`${rate.base} ${rate.currency} (${rate.code})`}</td>
-              <CurrencyCell>
-                {rate.rate.toFixed(3).replace(".", ",")}
-              </CurrencyCell>
-            </tr>
+              <span>{rate.country}</span>
+              <Price>
+                <span>{`${rate.base} ${rate.currency} (${rate.code}) at`}</span>
+
+                <UnitPrice>{`${rate.rate
+                  .toFixed(3)
+                  .replace(".", ",")} CZK`}</UnitPrice>
+              </Price>
+            </Row>
           );
         })}
-      </table>
-      <button
-        onClick={() => setState((prev) => ({ ...prev, page: prev.page - 1 }))}
-        disabled={state.page < 1}
-        data-testid="table-prev-btn"
-      >
-        Previous
-      </button>
-      <button
-        onClick={() => setState((prev) => ({ ...prev, page: prev.page + 1 }))}
-        disabled={!hasMore}
-        data-testid="table-next-btn"
-      >
-        Next
-      </button>
-    </div>
+      </Table>
+      <Footer>
+        <Btn
+          onClick={() => setState((prev) => ({ ...prev, page: prev.page - 1 }))}
+          disabled={state.page < 1}
+          data-testid="table-prev-btn"
+        >
+          Previous
+        </Btn>
+        <Btn
+          onClick={() => setState((prev) => ({ ...prev, page: prev.page + 1 }))}
+          disabled={!hasMore}
+          data-testid="table-next-btn"
+        >
+          Next
+        </Btn>
+      </Footer>
+    </FullWidth>
   );
 };
 

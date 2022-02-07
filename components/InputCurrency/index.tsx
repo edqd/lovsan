@@ -1,7 +1,9 @@
+import Btn from "components/Btn";
 import React, { useState } from "react";
+import { Input, Error } from "./Input";
 
 export const InputCurrency: React.FC<{
-  onSubmit: (value: number) => void;
+  onSubmit: (value?: number) => void;
   validate: (val?: number) => string | undefined;
 }> = ({ onSubmit, validate }) => {
   // in real world this would have probably been react-final-form/formik etc
@@ -23,12 +25,16 @@ export const InputCurrency: React.FC<{
         }
         if (!field.error && field.value) {
           onSubmit(field.value);
+        } else {
+          // erase previous result on bad submit
+          onSubmit();
         }
       }}
     >
-      <input
+      <Input
         type="number"
         data-testid="amount-input"
+        placeholder="69420"
         onChange={(e) =>
           setField((prev) => {
             const value = parseFloat(e.target.value);
@@ -39,9 +45,11 @@ export const InputCurrency: React.FC<{
             };
           })
         }
-      ></input>
-      <button data-testid="amount-submit" type="submit">Calculate</button>
-      {field.error && field.dirty && <div>{field.error}</div>}
+      ></Input>
+      <Btn data-testid="amount-submit" type="submit">
+        Calculate
+      </Btn>
+      {field.error && field.dirty && <Error>{field.error}</Error>}
     </form>
   );
 };
