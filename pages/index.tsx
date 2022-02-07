@@ -1,5 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Header from "components/Header";
+import TableRates from "components/TableRates";
+import InputCurrency from "components/InputCurrency";
+
 
 const Home: NextPage = () => {
   return (
@@ -14,9 +18,9 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1>
-          pozdravy z ostravy
-        </h1>
+        <Header>pozdravy z ostravy</Header>
+        <TableRates />
+        <InputCurrency />
       </main>
 
       <footer></footer>
