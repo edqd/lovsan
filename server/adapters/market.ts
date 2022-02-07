@@ -1,16 +1,5 @@
+import { MarketTicket } from "server/entities/types";
 import cnb from "../infra/cnb";
-
-interface MarketTicket {
-  createdAt: Date;
-  index: number;
-  rates: {
-    country: string;
-    currency: string;
-    base: number;
-    code: string;
-    rate: number;
-  }[];
-}
 
 /**
  * not used in the end, idea was to handle cases where cols would be rearanged
