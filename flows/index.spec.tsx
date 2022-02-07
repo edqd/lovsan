@@ -43,6 +43,6 @@ describe("conversion cost calculation", () => {
     });
     fireEvent.click(screen.getByTestId("amount-submit"));
 
-    expect(screen.getByTestId("amount-cost")).toHaveTextContent("346,61 CZK");
+    expect(screen.getByTestId("amount-cost")).toHaveTextContent("1,53");
   });
 });

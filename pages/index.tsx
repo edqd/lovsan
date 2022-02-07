@@ -6,11 +6,11 @@ import InputCurrency from "components/InputCurrency";
 import { useState } from "react";
 import { Rate } from "hooks/useExchangeList";
 import Big from "big.js";
-import Container, { Background, Main } from "components/Container";
+import Container, { Background, Emphasis, Main } from "components/Container";
 import Notification from "components/Notification";
 
 const convertMoney = (val: number, to: Rate) => {
-  return new Big(val).times(to.rate).div(to.base).toNumber();
+  return new Big(val).div(to.rate).times(to.base).toNumber();
 };
 
 const Home: NextPage = () => {
@@ -38,14 +38,14 @@ const Home: NextPage = () => {
         </Head>
 
         <Main>
-          <Header>🏦</Header>
+          <Header title="It's a bank">🏦</Header>
           <TableRates
             onSelect={(rate) => setCostCalc({ rate, cost: null, amount: null })}
             active={costCalc.rate}
           />
           {costCalc.rate ? (
             <>
-              <Notification>{`How much ${costCalc.rate.code} would you like to buy?`}</Notification>
+              <Notification>{`How much CZK you have?`}</Notification>
               <InputCurrency
                 onSubmit={(amount) => {
                   setCostCalc((prev) => {
@@ -73,11 +73,11 @@ const Home: NextPage = () => {
             <Notification>Please, select a conversion rate.</Notification>
           )}
           {costCalc.cost && costCalc.rate && (
-            <Notification data-testid="amount-cost">{`💵 Total price for ${
-              costCalc.amount
-            } ${costCalc.rate.code}: ${costCalc.cost
-              .toFixed(2)
-              .replace(".", ",")} CZK 💵`}</Notification>
+            <Notification>
+              {`💵 Total value of ${costCalc.amount} CZK: `}
+              <Emphasis data-testid="amount-cost">{`${costCalc.cost.toFixed(2).replace(".", ",")}`}</Emphasis>
+              {`${costCalc.rate.code} 💵`}
+            </Notification>
           )}
         </Main>
 

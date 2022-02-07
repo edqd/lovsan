@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export { default as Background } from "./Background";
 export { default as Main } from "./Main";
+export { default as Emphasis } from "./Emphasis";
 
 export const sizes = {
   sm: "640px",
