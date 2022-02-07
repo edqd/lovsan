@@ -9,6 +9,7 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@types/apicache": "^1.6.1",
     "@types/big.js": "^6.1.2",
     "@types/bunyan": "^1.8.8",
     "@types/cors": "^2.8.12",
@@ -16,6 +17,7 @@
     "@types/lru-cache": "^5.1.1",
     "@types/rc": "^1.2.0",
     "@types/styled-components": "^5.1.22",
+    "apicache": "^1.6.3",
     "axios": "^0.25.0",
     "big.js": "^6.1.1",
     "bunyan": "^1.8.15",
