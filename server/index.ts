@@ -8,6 +8,8 @@ import config from "./infra/config";
 import cors from "cors";
 // import helmet from "helmet";
 
+import { restApiAdapter } from "./adapters/rest";
+
 const log = baselog.child({ main: "server" });
 
 const dev = process.env.NODE_ENV !== "production";
@@ -25,6 +27,7 @@ app.prepare().then(() => {
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
 
+  server.use("/api", restApiAdapter);
 
   server.all("*", (req, res) => {
     return handle(req, res);

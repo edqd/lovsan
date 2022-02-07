@@ -12,6 +12,10 @@ interface MarketTicket {
   }[];
 }
 
+/**
+ * not used in the end, idea was to handle cases where cols would be rearanged
+ * but docs state its static so this would get purged
+ */
 const dict: Record<string, string> = {
   země: "country",
   měna: "currency",
@@ -26,7 +30,8 @@ const dict: Record<string, string> = {
  * @param str data from cnb
  */
 export const parseMarketTicket = (str: string): MarketTicket => {
-  const [identifier, header, ...data] = str.split("\n");
+  // get lines and remove empty ones
+  const [identifier, header, ...data] = str.split("\n").filter(l => l);
   const [stamp, counter] = identifier.split(" ");
   const [day, month, year] = stamp.split(".").map((v) => parseInt(v));
   const createdAt = new Date(year, month - 1, day);
