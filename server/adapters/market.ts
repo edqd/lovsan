@@ -1,4 +1,4 @@
-import { MarketTicket } from "server/entities/types";
+import { MarketTicket } from "../entities/types";
 import cnb from "../infra/cnb";
 
 /**
