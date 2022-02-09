@@ -9,6 +9,8 @@ export const Row = styled.button<{ active: boolean }>`
   padding: 0.3rem 0.7rem;
   background-color: ${(props) => (props.active ? "rgb(250 232 255)" : "white")};
   cursor: pointer;
+  margin: 0;
+  color: black;
 
   &:hover {
     background-color: rgb(245 208 254);
