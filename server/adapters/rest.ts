@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getTodayRates } from "../cases/rates";
-import { MarketTicket } from "../entities/types";
+import { getTodayRates } from "cases/rates";
+import { MarketTicket } from "entities/types";
 import { middleware as cache } from "apicache";
 
 export const restApiAdapter = Router();

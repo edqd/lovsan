@@ -8,6 +8,12 @@
     "lint": "next lint",
     "test": "jest --watch"
   },
+  "_moduleAliases": {
+    "infra": "./dist/infra",
+    "cases": "./dist/cases",
+    "entities": "./dist/entities",
+    "adapters": "./dist/adapters"
+  },
   "dependencies": {
     "@types/apicache": "^1.6.1",
     "@types/big.js": "^6.1.2",

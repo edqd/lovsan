@@ -3,7 +3,7 @@ import { Rate, useExchangeList } from "hooks/useExchangeList";
 import React, { useState, useMemo } from "react";
 import { Row, Price, UnitPrice } from "./Row";
 import { Footer } from "./Footer";
-import Btn from "components/Btn"
+import Btn from "components/Btn";
 import { Table, FullWidth } from "./Table";
 
 const perPage = 10;
@@ -14,7 +14,10 @@ export const TableRates: React.FC<{
 }> = ({ onSelect, active }) => {
   const { isLoading, data, error } = useExchangeList();
   const [state, setState] = useState({ page: 0 });
-  const { batch, hasMore } = useMemo(() => {
+  const { batch, hasMore } = useMemo<{
+    batch: Rate[];
+    hasMore: boolean;
+  }>(() => {
     if (data?.rates) {
       const start = state.page * perPage;
       const batch = data.rates.slice(state.page * perPage, start + 10);

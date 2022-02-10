@@ -1,5 +1,5 @@
-import { MarketTicket } from "../entities/types";
-import cnb from "../infra/cnb";
+import { MarketTicket } from "entities/types";
+import cnb from "infra/cnb";
 
 /**
  * not used in the end, idea was to handle cases where cols would be rearanged
