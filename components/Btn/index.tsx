@@ -7,11 +7,20 @@ export default styled.button`
   border-color: transparent;
   background: white;
   color: black;
-  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1))
+    drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
   cursor: pointer;
   margin: 0 0.1rem;
+
   &:hover {
     background-color: rgb(245 208 254);
+  }
+
+  &:disabled {
+    background: none;
+    cursor: auto;
+    color: rgb(140 140 140);
+    filter: none;
   }
 
   &:active {
